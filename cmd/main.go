@@ -44,6 +44,7 @@ type config struct {
 }
 
 func main() {
+
 	hello()
 	cfg := parseFlags()
 	cfg.Hostname = getHostname()
@@ -62,29 +63,30 @@ func main() {
 	}
 
 	if cfg.EmailRecipient == "" {
-		log.Println("Warning: no email recipient provided. Alerts will only be logged.")
+		log.Println("Warning: no email recipient provided. Alerts will only be logged locally")
+	} else {
+		log.Printf("Email recipient for alert notifications: %s", cfg.EmailRecipient)
 	}
 
 	log.Printf("Temperature threshold: %.2f°C", cfg.TempThreshold)
 	log.Printf("Check interval: %s", cfg.CheckInterval)
-
-	if cfg.EmailRecipient != "" {
-		log.Printf("Email recipient for alerts: %s", cfg.EmailRecipient)
-	}
-
 	log.Printf("Mail command: %s", mailCommand)
 
-	compareTemperatures(cfg) // Initial check
+	compareTemperatures(cfg) // Initial check before starting loop
+	tempCheckLoop(cfg)
+}
+
+// tempCheckLoop runs the main loop to check temperature and send alerts
+func tempCheckLoop(cfg config) {
 
 	ticker := time.NewTicker(cfg.CheckInterval)
 	defer ticker.Stop()
 
+	// Set up signal handler to monitor interrupts
 	sigChan := make(chan os.Signal, 1)
 	signal.Notify(sigChan, syscall.SIGINT, syscall.SIGTERM)
 
-	// Main loop to check temperature and send alerts
 	for {
-
 		select {
 		case <-ticker.C:
 			compareTemperatures(cfg)
@@ -93,9 +95,9 @@ func main() {
 			fmt.Print("\r") // Clear the ^C character from the terminal line
 			log.Printf("Received signal %s: shutting down", sig)
 			goodbye()
-
 		}
 	}
+
 }
 
 // validateMailCommand checks if the mail command is valid

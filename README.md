@@ -44,7 +44,7 @@ The process of installing **Go-Raspi-Temp-Monitor** is as follows:
 
 To clone the **Go-Raspi-Temp-Monitor** repository, run the following command on the build machine:
 
-```bash
+```console
 git clone https://github.com/richbl/go-raspi-temp-monitor.git
 ```
 
@@ -62,7 +62,7 @@ For this project, the target devices are Raspberry PI computers running the 32-b
 
 To build the application, run the following command from the project root directory on the build machine:
 
-```bash
+```console
 GOOS=linux GOARCH=arm GOARM=7 go build -o go-raspi-temp-monitor cmd/main.go
 ```
 
@@ -72,7 +72,7 @@ This will result in a binary file named `go-raspi-temp-monitor` that can then be
 
 To build the application for a 64-bit version of the Raspberry PI OS, run the following command from the project root directory on the build machine:
 
-```bash
+```console
 GOOS=linux GOARCH=arm64 go build -o go-raspi-temp-monitor cmd/main.go
 ```
 
@@ -92,13 +92,13 @@ To configure **Go-Raspi-Temp-Monitor** to run as a systemd service:
 2. Copy the **Go-Raspi-Temp-Monitor** service file (`go-raspi-temp-monitor.service`) into the `/etc/systemd/system` directory
 3. Enable the **Go-Raspi-Temp-Monitor** service. This can be done via the command:
 
-```bash
+```console
 sudo systemctl enable go-raspi-temp-monitor.service
 ``` 
 
 4. Start the **Go-Raspi-Temp-Monitor** service. This can be done via the command
 
-```bash
+```console
 sudo systemctl start go-raspi-temp-monitor.service
 ```
 
@@ -110,13 +110,13 @@ At this point, **Go-Raspi-Temp-Monitor** should be running as a systemd service 
 
 Optionally, and to confirm that the email delivery feature is working as expected, **Go-Raspi-Temp-Monitor** can be tested by sending a real-time email via the following command:
 
-```bash
+```console
 go-raspi-temp-monitor -test-email -recipient=your_email@example.com
 ```
 
 The application will respond with:
 
-```bash
+```console
 2025/05/14 14:26:06 ----- Starting Go-Raspi-Temp-Monitor 0.5.0
 2025/05/14 14:26:06 Hostname is: picam-alpha
 2025/05/14 14:26:06 Attempting to send email to your_email@example.com
@@ -141,13 +141,13 @@ While it's likely more typical that users will use the **Go-Raspi-Temp-Monitor**
 
 As an example, the following command will set the recipient email address to `your_email@example.com`, set the CPU temperature threshold to 60 degrees Celsius, and set the check interval to 5 seconds:
 
-```bash
+```console
 go-raspi-temp-monitor -recipient=your_email@example.com -threshold=60 -interval=5s
 ```
 
 The output of this command is as follows:
 
-```bash
+```console
 2025/05/14 14:59:53 ----- Starting Go-Raspi-Temp-Monitor 0.5.0
 2025/05/14 14:59:53 Hostname is: picam-alpha
 2025/05/14 14:59:53 Temperature threshold: 60.00°C
