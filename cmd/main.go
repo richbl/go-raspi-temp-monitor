@@ -20,7 +20,7 @@ import (
 const (
 	appPrefix       = "-----"
 	appName         = "Go-Raspi-Temp-Monitor"
-	appVersion      = "0.5.0"
+	appVersion      = "0.6.0"
 	cpuTempFilePath = "/sys/class/thermal/thermal_zone0/temp"
 	mailCommand     = "/usr/bin/mail"
 )
