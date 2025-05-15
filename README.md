@@ -66,6 +66,8 @@ To build the application, run the following command from the project root direct
 GOOS=linux GOARCH=arm GOARM=7 go build -o go-raspi-temp-monitor cmd/main.go
 ```
 
+> Note that `GOARM=6` may be required when building the binary for older Raspberry PI devices (e.g., Raspberry PI Zero). Check your device specifications to determine the correct value required
+
 This will result in a binary file named `go-raspi-temp-monitor` that can then be installed on the target Raspberry PI device.
 
 #### Building for Raspberry PI OS 64-bit
