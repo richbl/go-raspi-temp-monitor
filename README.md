@@ -3,7 +3,7 @@
 **Go-Raspi-Temp-Monitor** is a temperature monitoring application designed for Raspberry PI devices. It will read the CPU temperature at regular intervals and send alerts via email when the temperature exceeds a specified threshold.
 
 <p align="center">
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/ca0e753f-b77d-4927-a087-3d9903731902"><source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/ca0e753f-b77d-4927-a087-3d9903731902"><img src="[https://github.com/user-attachments/assets/ca0e753f-b77d-4927-a087-3d9903731902](https://github.com/user-attachments/assets/ca0e753f-b77d-4927-a087-3d9903731902)" width=600></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/ca0e753f-b77d-4927-a087-3d9903731902"><source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/ca0e753f-b77d-4927-a087-3d9903731902"><img src="[https://github.com/user-attachments/assets/ca0e753f-b77d-4927-a087-3d9903731902](https://github.com/user-attachments/assets/ca0e753f-b77d-4927-a087-3d9903731902)" width=500></picture>
 </p>
 
 ## Rationale
