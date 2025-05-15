@@ -117,12 +117,12 @@ go-raspi-temp-monitor -test-email -recipient=your_email@example.com
 The application will respond with:
 
 ```console
-2025/05/14 14:26:06 ----- Starting Go-Raspi-Temp-Monitor 0.5.0
+2025/05/14 14:26:06 ----- Starting Go-Raspi-Temp-Monitor 0.6.0
 2025/05/14 14:26:06 Hostname is: picam-alpha
 2025/05/14 14:26:06 Attempting to send email to your_email@example.com
 2025/05/14 14:26:08 Email sent successfully to your_email@example.com
 2025/05/14 14:26:08 Test email sent successfully
-2025/05/14 14:26:08 ----- Exiting Go-Raspi-Temp-Monitor 0.5.0
+2025/05/14 14:26:08 ----- Exiting Go-Raspi-Temp-Monitor 0.6.0
 ```
 
 ## Usage
@@ -148,7 +148,7 @@ go-raspi-temp-monitor -recipient=your_email@example.com -threshold=60 -interval=
 The output of this command is as follows:
 
 ```console
-2025/05/14 14:59:53 ----- Starting Go-Raspi-Temp-Monitor 0.5.0
+2025/05/14 14:59:53 ----- Starting Go-Raspi-Temp-Monitor 0.6.0
 2025/05/14 14:59:53 Hostname is: picam-alpha
 2025/05/14 14:59:53 Temperature threshold: 60.00°C
 2025/05/14 14:59:53 Check interval: 5s
@@ -158,7 +158,7 @@ The output of this command is as follows:
 2025/05/14 14:59:58 Current CPU temperature: 46.16°C
 2025/05/14 15:00:03 Current CPU temperature: 47.24°C
 2025/05/14 15:00:05 Received signal interrupt: shutting down
-2025/05/14 15:00:05 ----- Exiting Go-Raspi-Temp-Monitor 0.5.0
+2025/05/14 15:00:05 ----- Exiting Go-Raspi-Temp-Monitor 0.6.0
 ```
 
 In the above example, if the CPU temperature ever exceeds 60 degrees Celsius, the application would send an email notification to `your_email@example.com`.
