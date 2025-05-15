@@ -6,6 +6,9 @@
 <picture><source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/ca0e753f-b77d-4927-a087-3d9903731902"><source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/ca0e753f-b77d-4927-a087-3d9903731902"><img src="[https://github.com/user-attachments/assets/ca0e753f-b77d-4927-a087-3d9903731902](https://github.com/user-attachments/assets/ca0e753f-b77d-4927-a087-3d9903731902)" width=500></picture>
 </p>
 
+![GitHub Release](https://img.shields.io/github/v/release/richbl/go-raspi-temp-monitor?include_prereleases&sort=semver&display_name=tag&style=flat&color=blue)  [![Go Report Card](https://goreportcard.com/badge/github.com/richbl/go-raspi-temp-monitor)](https://goreportcard.com/report/github.com/richbl/go-raspi-temp-monitor)  [![Codacy Badge](https://app.codacy.com/project/badge/Grade/9578d68b618d4b2a8e1dd928b8ebb9d6)](https://app.codacy.com/gh/richbl/go-raspi-temp-monitor/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade) 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=richbl_go-raspi-temp-monitor&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=richbl_go-raspi-temp-monitor)
+
 ## Rationale
 
 I run a number of Raspberry PI devices as part of my [Distributed Motion Surveillance Security System (DMS3) project](https://github.com/richbl/go-distributed-motion-s3) and noticed that every so often, one of them would just quietly drop from the network. Reviewing the logs of the dead devices wasn't providing anything definitive, so I thought that--perhaps--the issue may relate to unusually high CPU temperatures. In short, I wanted a simple way to remotely monitor these device temperatures.
@@ -87,8 +90,19 @@ To configure **Go-Raspi-Temp-Monitor** to run as a systemd service:
 
 1. Edit the **Go-Raspi-Temp-Monitor** service file (`go-raspi-temp-monitor.service`), making sure to replace the placeholder email address (`your_email@example.com`) with an appropriate email address. As well, be sure to review and edit the command line flags passed into the application (the default values will work for most users)
 2. Copy the **Go-Raspi-Temp-Monitor** service file (`go-raspi-temp-monitor.service`) into the `/etc/systemd/system` directory
-3. Enable the **Go-Raspi-Temp-Monitor** service. This can be done via the command `sudo systemctl enable go-raspi-temp-monitor.service`
-4. Start the **Go-Raspi-Temp-Monitor** service. This can be done via the command `sudo systemctl start go-raspi-temp-monitor.service`
+3. Enable the **Go-Raspi-Temp-Monitor** service. This can be done via the command:
+
+```bash
+sudo systemctl enable go-raspi-temp-monitor.service
+``` 
+
+4. Start the **Go-Raspi-Temp-Monitor** service. This can be done via the command
+
+```bash
+sudo systemctl start go-raspi-temp-monitor.service
+```
+
+> Note:`sudo systemctl start go-raspi-temp-monitor.service`
 
 At this point, **Go-Raspi-Temp-Monitor** should be running as a systemd service on the target Raspberry PI device.
 
@@ -161,4 +175,4 @@ Regardless, if you have any thoughts or ideas for improvement, send them my way.
 
 ## License
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/richbl/go-raspi-temp-monitor/blob/main/LICENSE) file for details.
