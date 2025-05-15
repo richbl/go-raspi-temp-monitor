@@ -1,0 +1,16 @@
+# Go Raspberry Pi Temperature Monitor Systemd Service Unit
+# 0.5.0
+
+[Unit]
+Description=Go Raspberry Pi Temperature Monitor (go-raspi-temp-monitor)
+After=network.target mailutils.service ssmtp.service
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/go-raspi-temp-monitor -recipient="your_email@example.com" -threshold="60.0" -interval="5m"
+Restart=on-failure
+RestartSec=5s
+User=pi # Ensure this user can run the above 'go-raspi-temp-monitor' command and successfully execute the 'mail' command
+
+[Install]
+WantedBy=multi-user.target
