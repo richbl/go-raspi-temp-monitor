@@ -96,7 +96,7 @@ To configure **Go-Raspi-Temp-Monitor** to run as a systemd service:
 
 ```console
 sudo systemctl enable go-raspi-temp-monitor.service
-``` 
+```
 
 4. Start the **Go-Raspi-Temp-Monitor** service. This can be done via the command
 
@@ -119,12 +119,18 @@ go-raspi-temp-monitor -test-email -recipient=your_email@example.com
 The application will respond with:
 
 ```console
-2025/05/14 14:26:06 ----- Starting Go-Raspi-Temp-Monitor 0.6.0
-2025/05/14 14:26:06 Hostname is: picam-alpha
-2025/05/14 14:26:06 Attempting to send email to your_email@example.com
-2025/05/14 14:26:08 Email sent successfully to your_email@example.com
-2025/05/14 14:26:08 Test email sent successfully
-2025/05/14 14:26:08 ----- Exiting Go-Raspi-Temp-Monitor 0.6.0
+2025/05/15 17:39:22 ----- Starting Go-Raspi-Temp-Monitor 0.7.0
+2025/05/15 17:39:22 ----- Configuration
+2025/05/15 17:39:22 |
+2025/05/15 17:39:22 | Temperature threshold ('-threshold'): 60.00°C
+2025/05/15 17:39:22 | Check interval ('-interval'): 5m0s
+2025/05/15 17:39:22 | Email recipient ('-recipient'): your_email@example.com
+2025/05/15 17:39:22 | Mail command: /usr/bin/mail
+2025/05/15 17:39:22 | Device hostname: picam-alpha
+2025/05/15 17:39:22 |
+2025/05/15 17:39:22 Attempting to send email to your_email@example.com
+2025/05/15 17:39:27 Email sent successfully to your_email@example.com
+2025/05/15 17:39:27 ----- Exiting Go-Raspi-Temp-Monitor 0.7.0
 ```
 
 ## Usage
@@ -150,17 +156,21 @@ go-raspi-temp-monitor -recipient=your_email@example.com -threshold=60 -interval=
 The output of this command is as follows:
 
 ```console
-2025/05/14 14:59:53 ----- Starting Go-Raspi-Temp-Monitor 0.6.0
-2025/05/14 14:59:53 Hostname is: picam-alpha
-2025/05/14 14:59:53 Temperature threshold: 60.00°C
-2025/05/14 14:59:53 Check interval: 5s
-2025/05/14 14:59:53 Email recipient for alerts: your_email@example.com
-2025/05/14 14:59:53 Mail command: /usr/bin/mail
-2025/05/14 14:59:53 Current CPU temperature: 47.24°C
-2025/05/14 14:59:58 Current CPU temperature: 46.16°C
-2025/05/14 15:00:03 Current CPU temperature: 47.24°C
-2025/05/14 15:00:05 Received signal interrupt: shutting down
-2025/05/14 15:00:05 ----- Exiting Go-Raspi-Temp-Monitor 0.6.0
+2025/05/15 17:47:07 ----- Starting Go-Raspi-Temp-Monitor 0.7.0
+2025/05/15 17:47:07 ----- Configuration
+2025/05/15 17:47:07 |
+2025/05/15 17:47:07 | Temperature threshold ('-threshold'): 60.00°C
+2025/05/15 17:47:07 | Check interval ('-interval'): 5s
+2025/05/15 17:47:07 | Email recipient ('-recipient'): your_email@example.com
+2025/05/15 17:47:07 | Mail command: /usr/bin/mail
+2025/05/15 17:47:07 | Device hostname: picam-alpha
+2025/05/15 17:47:07 |
+2025/05/15 17:47:07 ----- Monitoring
+2025/05/15 17:47:07 Current CPU temperature: 42.00°C
+2025/05/15 17:47:12 Current CPU temperature: 42.00°C
+2025/05/15 17:47:17 Current CPU temperature: 42.00°C
+2025/05/15 17:47:19 Received signal interrupt: shutting down
+2025/05/15 17:47:19 ----- Exiting Go-Raspi-Temp-Monitor 0.7.0
 ```
 
 In the above example, if the CPU temperature ever exceeds 60 degrees Celsius, the application would send an email notification to `your_email@example.com`.

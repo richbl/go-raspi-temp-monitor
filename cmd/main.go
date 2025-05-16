@@ -18,20 +18,20 @@ import (
 
 // Application constants
 const (
-	appPrefix       = "-----"
-	appName         = "Go-Raspi-Temp-Monitor"
-	appVersion      = "0.6.0"
+	appPrefix        = "-----"
+	appName          = "Go-Raspi-Temp-Monitor"
+	appVersion       = "0.7.0"
+	noEmailRecipient = "<none>"
+
 	cpuTempFilePath = "/sys/class/thermal/thermal_zone0/temp"
 	mailCommand     = "/usr/bin/mail"
 )
 
 // Application errors
 var (
-	errMailCommandNotFound        = errors.New("Mail command not found")
-	errMailAccess                 = errors.New("Error accessing mail command")
-	errIsDirectory                = errors.New("Mail command path points to a directory")
-	errNotExecutable              = errors.New("Mail command is not executable")
-	errTestEmailRequiresRecipient = errors.New("-test-email flag requires -recipient to be set")
+	errIsDirectory                = errors.New("'mail' command points to a directory")
+	errNotExecutable              = errors.New("'mail' command is not executable")
+	errTestEmailRequiresRecipient = errors.New("'-test-email' flag requires '-recipient' flag to be set")
 )
 
 // Application configuration flags
@@ -54,6 +54,9 @@ func main() {
 		goodbye()
 	}
 
+	log.Println(appPrefix, "Configuration")
+	showConfiguration(cfg)
+
 	// Check if -test-email flag is set
 	if cfg.TestEmailFlag {
 		if err := sendTestEmail(cfg); err != nil {
@@ -62,16 +65,7 @@ func main() {
 		goodbye()
 	}
 
-	if cfg.EmailRecipient == "" {
-		log.Println("Warning: no email recipient provided. Alerts will only be logged locally")
-	} else {
-		log.Printf("Email recipient for alert notifications: %s", cfg.EmailRecipient)
-	}
-
-	log.Printf("Temperature threshold: %.2f°C", cfg.TempThreshold)
-	log.Printf("Check interval: %s", cfg.CheckInterval)
-	log.Printf("Mail command: %s", mailCommand)
-
+	log.Println(appPrefix, "Monitoring")
 	compareTemperatures(cfg) // Initial check before starting loop
 	tempCheckLoop(cfg)
 }
@@ -106,19 +100,37 @@ func validateMailCommand(mailCommand string) error {
 	info, err := os.Stat(mailCommand)
 	switch {
 	case errors.Is(err, os.ErrNotExist): // Check if file exists
-		return fmt.Errorf("%w when checking '%s'", errMailCommandNotFound, mailCommand)
+		return fmt.Errorf("Error: '%s' %w", mailCommand, os.ErrNotExist)
 
-	case err != nil: // Catch other errors from os.Stat
-		return fmt.Errorf("%w when checking '%s': %w", errMailAccess, mailCommand, err)
+	case err != nil: // Catch all other errors from os.Stat() call
+		return fmt.Errorf("Error: %w", err)
 
 	case info.IsDir(): // Check if file is a directory
-		return fmt.Errorf("%w '%s'", errIsDirectory, mailCommand)
+		return fmt.Errorf("Error: %w '%s'", errIsDirectory, mailCommand)
 
 	case info.Mode()&0111 == 0: // Check if file is not executable
-		return fmt.Errorf("%w: '%s'", errNotExecutable, mailCommand)
+		return fmt.Errorf("%w (%s)", errNotExecutable, mailCommand)
 	}
 
 	return nil
+}
+
+// showConfiguration displays the current configuration
+func showConfiguration(cfg config) {
+
+	log.Printf("|\n")
+	log.Printf("| Temperature threshold ('-threshold'): %.2f°C\n", cfg.TempThreshold)
+	log.Printf("| Check interval ('-interval'): %s\n", cfg.CheckInterval)
+
+	if cfg.EmailRecipient == "" {
+		cfg.EmailRecipient = noEmailRecipient
+	}
+
+	log.Printf("| Email recipient ('-recipient'): %s\n", cfg.EmailRecipient)
+	log.Printf("| Mail command: %s\n", mailCommand)
+	log.Printf("| Device hostname: %s\n", cfg.Hostname)
+	log.Printf("|\n")
+
 }
 
 // getHostname returns the hostname of the system
@@ -126,10 +138,8 @@ func getHostname() string {
 
 	hostname, err := os.Hostname()
 	if err != nil {
-		log.Printf("Warning: failed to get hostname. Using 'unknown-host'")
-		hostname = "unknown-host"
+		hostname = "<unknown-host>"
 	}
-	log.Printf("Hostname is: %s", hostname)
 
 	return hostname
 }
@@ -151,7 +161,7 @@ func parseFlags() config {
 func sendTestEmail(cfg config) error {
 
 	// Check if recipient is set
-	if cfg.EmailRecipient == "" {
+	if cfg.EmailRecipient == noEmailRecipient {
 		return errTestEmailRequiresRecipient
 	}
 
@@ -170,15 +180,13 @@ func sendTestEmail(cfg config) error {
 		return fmt.Errorf("%w", err)
 	}
 
-	log.Println("Test email sent successfully")
-
 	return nil
 }
 
 // sendEmail sends an email using the configured mail command
 func sendEmail(cfg config, subject, body string) error {
 
-	if cfg.EmailRecipient == "" {
+	if cfg.EmailRecipient == noEmailRecipient {
 		log.Println("Email recipient not set: no email will be sent.")
 		return nil // Not an error, just won't send
 	}
@@ -252,7 +260,7 @@ func compareTemperatures(cfg config) {
 	if currentTemp > cfg.TempThreshold {
 		log.Printf("ALERT: Temperature %.2f°C exceeds threshold of %.2f°C", currentTemp, cfg.TempThreshold)
 
-		if cfg.EmailRecipient == "" {
+		if cfg.EmailRecipient == noEmailRecipient {
 			log.Println("No recipient configured: no email notification sent")
 			return
 		}
