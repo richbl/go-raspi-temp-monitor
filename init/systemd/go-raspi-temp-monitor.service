@@ -1,5 +1,5 @@
 # Go Raspberry Pi Temperature Monitor Systemd Service Unit
-# 0.6.0
+# 0.7.0
 
 [Unit]
 Description=Go Raspberry Pi Temperature Monitor (go-raspi-temp-monitor)
