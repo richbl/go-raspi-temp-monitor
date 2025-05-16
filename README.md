@@ -3,7 +3,7 @@
 **Go-Raspi-Temp-Monitor** is a temperature monitoring application designed for Raspberry PI devices. It will read the CPU temperature at regular intervals and send alerts via email when the temperature exceeds a specified threshold.
 
 <p align="center">
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/ca0e753f-b77d-4927-a087-3d9903731902"><source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/ca0e753f-b77d-4927-a087-3d9903731902"><img src="[https://github.com/user-attachments/assets/ca0e753f-b77d-4927-a087-3d9903731902](https://github.com/user-attachments/assets/ca0e753f-b77d-4927-a087-3d9903731902)" width=500></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/e2815396-a682-4f94-97f7-52abd5345c0b"><source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/e2815396-a682-4f94-97f7-52abd5345c0b"><img src="[https://github.com/user-attachments/assets/e2815396-a682-4f94-97f7-52abd5345c0b](https://github.com/user-attachments/assets/e2815396-a682-4f94-97f7-52abd5345c0b)" width=500></picture>
 </p>
 
 ![GitHub Release](https://img.shields.io/github/v/release/richbl/go-raspi-temp-monitor?include_prereleases&sort=semver&display_name=tag&style=flat&color=blue)  [![Go Report Card](https://goreportcard.com/badge/github.com/richbl/go-raspi-temp-monitor)](https://goreportcard.com/report/github.com/richbl/go-raspi-temp-monitor)  [![Codacy Badge](https://app.codacy.com/project/badge/Grade/9578d68b618d4b2a8e1dd928b8ebb9d6)](https://app.codacy.com/gh/richbl/go-raspi-temp-monitor/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade) 
@@ -104,13 +104,15 @@ sudo systemctl enable go-raspi-temp-monitor.service
 sudo systemctl start go-raspi-temp-monitor.service
 ```
 
-> Note:`sudo systemctl start go-raspi-temp-monitor.service`
+At this point, **Go-Raspi-Temp-Monitor** should be running as a systemd service on the target Raspberry PI device. To check the status of the service, use the following command:
 
-At this point, **Go-Raspi-Temp-Monitor** should be running as a systemd service on the target Raspberry PI device.
+```console
+sudo systemctl status go-raspi-temp-monitor.service
+```
 
-### Testing Email Delivery
+### Testing Email Operation and Delivery
 
-Optionally, and to confirm that the email delivery feature is working as expected, **Go-Raspi-Temp-Monitor** can be tested by sending a real-time email via the following command:
+Optionally, and to confirm that the email delivery feature is working as expected, **Go-Raspi-Temp-Monitor** can be tested by sending a real-time email with the following command:
 
 ```console
 go-raspi-temp-monitor -test-email -recipient=your_email@example.com
@@ -131,6 +133,14 @@ The application will respond with:
 2025/05/15 17:39:22 Attempting to send email to your_email@example.com
 2025/05/15 17:39:27 Email sent successfully to your_email@example.com
 2025/05/15 17:39:27 ----- Exiting Go-Raspi-Temp-Monitor 0.7.0
+```
+A test email should arrive entitled "Go-Raspi-Temp-Monitor: Test Alert (`<hostname>`)" with the following content:
+
+```console
+Warning: this is a test email
+Hostname: <hostname>
+Current CPU temperature: 47.24°C
+Timestamp: Thu, 15 May 2025 18:02:57 PDT
 ```
 
 ## Usage
