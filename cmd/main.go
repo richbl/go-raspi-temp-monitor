@@ -55,7 +55,7 @@ func main() {
 	}
 
 	log.Println(appPrefix, "Configuration")
-	showConfiguration(cfg)
+	showConfiguration(&cfg)
 
 	// Check if -test-email flag is set
 	if cfg.TestEmailFlag {
@@ -116,9 +116,10 @@ func validateMailCommand(mailCommand string) error {
 }
 
 // showConfiguration displays the current configuration
-func showConfiguration(cfg config) {
+func showConfiguration(cfg *config) {
 
 	log.Printf("|\n")
+	log.Printf("| Application version: %s\n", appVersion)
 	log.Printf("| Temperature threshold ('-threshold'): %.2f°C\n", cfg.TempThreshold)
 	log.Printf("| Check interval ('-interval'): %s\n", cfg.CheckInterval)
 
