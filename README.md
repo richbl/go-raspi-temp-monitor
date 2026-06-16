@@ -1,13 +1,17 @@
 # Go Raspberry PI Temperature Monitor
 
+<!-- markdownlint-disable MD033 -->
+<a href="https://github.com/richbl/go-raspi-temp-monitor/releases"><img alt="Link to Releases" src="https://badgen.net/github/tag/richbl/go-raspi-temp-monitor?icon=github&label=release"></a>
+<a href="https://goreportcard.com/report/github.com/richbl/go-raspi-temp-monitor"><img alt="Link to Go Report Card" src="https://goreportcard.com/badge/github.com/richbl/go-raspi-temp-monitor"></a>
+<a href="https://app.codacy.com/gh/richbl/go-raspi-temp-monitor/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade"><img alt="Link to Codacy Report" src="https://app.codacy.com/project/badge/Grade/9578d68b618d4b2a8e1dd928b8ebb9d6"></a>
+<a href="https://sonarcloud.io/summary/new_code?id=richbl_go-raspi-temp-monitor"><img alt="Link to SonarCloud Report" src="https://sonarcloud.io/api/project_badges/quality_gate?project=richbl_go-raspi-temp-monitor"></a>
+<!-- markdownlint-enable MD033 -->
+
 **Go-Raspi-Temp-Monitor** is a temperature monitoring application designed for Raspberry PI devices. It will read the CPU temperature at regular intervals and send alerts via email when the temperature exceeds a specified threshold.
 
 <p align="center">
 <picture><source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/e2815396-a682-4f94-97f7-52abd5345c0b"><source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/e2815396-a682-4f94-97f7-52abd5345c0b"><img src="[https://github.com/user-attachments/assets/e2815396-a682-4f94-97f7-52abd5345c0b](https://github.com/user-attachments/assets/e2815396-a682-4f94-97f7-52abd5345c0b)" width=500></picture>
 </p>
-
-![GitHub Release](https://img.shields.io/github/v/release/richbl/go-raspi-temp-monitor?include_prereleases&sort=semver&display_name=tag&style=flat&color=blue)  [![Go Report Card](https://goreportcard.com/badge/github.com/richbl/go-raspi-temp-monitor)](https://goreportcard.com/report/github.com/richbl/go-raspi-temp-monitor)  [![Codacy Badge](https://app.codacy.com/project/badge/Grade/9578d68b618d4b2a8e1dd928b8ebb9d6)](https://app.codacy.com/gh/richbl/go-raspi-temp-monitor/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade) 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=richbl_go-raspi-temp-monitor&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=richbl_go-raspi-temp-monitor)
 
 ## Rationale
 
