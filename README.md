@@ -9,9 +9,11 @@
 
 **Go-Raspi-Temp-Monitor** is a temperature monitoring application designed for Raspberry PI devices. It will read the CPU temperature at regular intervals and send alerts via email when the temperature exceeds a specified threshold.
 
+<!-- markdownlint-disable MD033 -->
 <p align="center">
-<picture><source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/e2815396-a682-4f94-97f7-52abd5345c0b"><source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/e2815396-a682-4f94-97f7-52abd5345c0b"><img src="[https://github.com/user-attachments/assets/e2815396-a682-4f94-97f7-52abd5345c0b](https://github.com/user-attachments/assets/e2815396-a682-4f94-97f7-52abd5345c0b)" width=500></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/e2815396-a682-4f94-97f7-52abd5345c0b"><source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/e2815396-a682-4f94-97f7-52abd5345c0b"><img alt="Link to Go-Raspi-Temp-Monitor Logo" src="[https://github.com/user-attachments/assets/e2815396-a682-4f94-97f7-52abd5345c0b](https://github.com/user-attachments/assets/e2815396-a682-4f94-97f7-52abd5345c0b)" width=500></picture>
 </p>
+<!-- markdownlint-enable MD033 -->
 
 ## Rationale
 
@@ -60,7 +62,7 @@ Once cloned, the **Go-Raspi-Temp-Monitor** application can be built and installe
 
 Building the **Go-Raspi-Temp-Monitor** application requires an understanding of the target Raspberry PI architecture and operating system, as the build process will be a cross-compile, meaning that the resulting binary will be compatible with the target architecture (and not necessarily the build machine architecture).
 
-The topic of cross-compiling is beyond the scope of this document, but the [Go documentation](https://pkg.go.dev/cmd/go#hdr-Environment_variables) provides a good overview of the process. As well, a good overview of the relevant cross-compiling flags used in this project--`GOOS`, `GOARCH`, and `GOARM`--can be found [here](https://go.dev/doc/install/source#environment).
+The topic of cross-compiling is beyond the scope of this document, but the [Go documentation](https://pkg.go.dev/cmd/go#hdr-Environment_variables) provides a good overview of the process. As well, a good overview of the relevant cross-compiling flags used in this project--`GOOS`, `GOARCH`, and `GOARM`--can be found [at this site](https://go.dev/doc/install/source#environment).
 
 For this project, the target devices are Raspberry PI computers running the 32-bit version of the [Raspberry PI OS](https://www.raspberrypi.com/software/operating-systems/).
 
@@ -102,7 +104,7 @@ To configure **Go-Raspi-Temp-Monitor** to run as a systemd service:
 sudo systemctl enable go-raspi-temp-monitor.service
 ```
 
-4. Start the **Go-Raspi-Temp-Monitor** service. This can be done via the command
+1. Start the **Go-Raspi-Temp-Monitor** service. This can be done via the command
 
 ```console
 sudo systemctl start go-raspi-temp-monitor.service
@@ -125,7 +127,7 @@ go-raspi-temp-monitor -test-email -recipient=your_email@example.com
 The application will respond with:
 
 ```console
-2025/05/15 17:39:22 ----- Starting Go-Raspi-Temp-Monitor 0.7.0
+2025/05/15 17:39:22 ----- Starting Go-Raspi-Temp-Monitor 0.7.1
 2025/05/15 17:39:22 ----- Configuration
 2025/05/15 17:39:22 |
 2025/05/15 17:39:22 | Temperature threshold ('-threshold'): 60.00°C
@@ -136,8 +138,9 @@ The application will respond with:
 2025/05/15 17:39:22 |
 2025/05/15 17:39:22 Attempting to send email to your_email@example.com
 2025/05/15 17:39:27 Email sent successfully to your_email@example.com
-2025/05/15 17:39:27 ----- Exiting Go-Raspi-Temp-Monitor 0.7.0
+2025/05/15 17:39:27 ----- Exiting Go-Raspi-Temp-Monitor 0.7.1
 ```
+
 A test email should arrive entitled "Go-Raspi-Temp-Monitor: Test Alert (`<hostname>`)" with the following content:
 
 ```console
@@ -170,7 +173,7 @@ go-raspi-temp-monitor -recipient=your_email@example.com -threshold=60 -interval=
 The output of this command is as follows:
 
 ```console
-2025/05/15 17:47:07 ----- Starting Go-Raspi-Temp-Monitor 0.7.0
+2025/05/15 17:47:07 ----- Starting Go-Raspi-Temp-Monitor 0.7.1
 2025/05/15 17:47:07 ----- Configuration
 2025/05/15 17:47:07 |
 2025/05/15 17:47:07 | Temperature threshold ('-threshold'): 60.00°C
@@ -184,7 +187,7 @@ The output of this command is as follows:
 2025/05/15 17:47:12 Current CPU temperature: 42.00°C
 2025/05/15 17:47:17 Current CPU temperature: 42.00°C
 2025/05/15 17:47:19 Received signal interrupt: shutting down
-2025/05/15 17:47:19 ----- Exiting Go-Raspi-Temp-Monitor 0.7.0
+2025/05/15 17:47:19 ----- Exiting Go-Raspi-Temp-Monitor 0.7.1
 ```
 
 In the above example, if the CPU temperature ever exceeds 60 degrees Celsius, the application would send an email notification to `your_email@example.com`.

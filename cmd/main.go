@@ -20,7 +20,7 @@ import (
 const (
 	appPrefix        = "-----"
 	appName          = "Go-Raspi-Temp-Monitor"
-	appVersion       = "0.7.0"
+	appVersion       = "0.7.1"
 	noEmailRecipient = "<none>"
 
 	cpuTempFilePath = "/sys/class/thermal/thermal_zone0/temp"
@@ -86,7 +86,7 @@ func tempCheckLoop(cfg config) {
 			compareTemperatures(cfg)
 
 		case sig := <-sigChan:
-			fmt.Print("\r") // Clear the ^C character from the terminal line
+			_, _ = os.Stdout.WriteString("\r") // Clear the ^C character from the terminal line
 			log.Printf("Received signal %s: shutting down", sig)
 			goodbye()
 		}
@@ -100,13 +100,13 @@ func validateMailCommand(mailCommand string) error {
 	info, err := os.Stat(mailCommand)
 	switch {
 	case errors.Is(err, os.ErrNotExist): // Check if file exists
-		return fmt.Errorf("Error: '%s' %w", mailCommand, os.ErrNotExist)
+		return fmt.Errorf("error: '%s' %w", mailCommand, os.ErrNotExist)
 
 	case err != nil: // Catch all other errors from os.Stat() call
-		return fmt.Errorf("Error: %w", err)
+		return fmt.Errorf("error: %w", err)
 
 	case info.IsDir(): // Check if file is a directory
-		return fmt.Errorf("Error: %w '%s'", errIsDirectory, mailCommand)
+		return fmt.Errorf("error: %w '%s'", errIsDirectory, mailCommand)
 
 	case info.Mode()&0111 == 0: // Check if file is not executable
 		return fmt.Errorf("%w (%s)", errNotExecutable, mailCommand)
@@ -189,6 +189,7 @@ func sendEmail(cfg config, subject, body string) error {
 
 	if cfg.EmailRecipient == noEmailRecipient {
 		log.Println("Email recipient not set: no email will be sent.")
+
 		return nil // Not an error, just won't send
 	}
 
@@ -207,15 +208,16 @@ func sendEmail(cfg config, subject, body string) error {
 	log.Printf("Attempting to send email to %s", cfg.EmailRecipient)
 
 	if err := cmd.Run(); err != nil {
-		errMsg := fmt.Sprintf("failed to send email: %v", err)
+		errMsg := "failed to send email: " + err.Error()
 
 		if stderr.Len() > 0 {
-			errMsg += fmt.Sprintf(". Stderr: %s", stderr.String())
+			errMsg += ". Stderr: " + stderr.String()
 		}
 
 		// Check if context deadline exceeded while sending email
 		if errors.Is(ctx.Err(), context.DeadlineExceeded) {
 			log.Printf("%s (timed out)", errMsg)
+
 			return fmt.Errorf("%s (timed out): %w", errMsg, context.DeadlineExceeded)
 		}
 
@@ -263,6 +265,7 @@ func compareTemperatures(cfg config) {
 
 		if cfg.EmailRecipient == noEmailRecipient {
 			log.Println("No recipient configured: no email notification sent")
+
 			return
 		}
 
