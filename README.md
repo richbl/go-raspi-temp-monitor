@@ -2,7 +2,6 @@
 
 <!-- markdownlint-disable MD033 -->
 <a href="https://github.com/richbl/go-raspi-temp-monitor/releases"><img alt="Link to Releases" src="https://badgen.net/github/tag/richbl/go-raspi-temp-monitor?icon=github&label=release"></a>
-<a href="https://goreportcard.com/report/github.com/richbl/go-raspi-temp-monitor"><img alt="Link to Go Report Card" src="https://goreportcard.com/badge/github.com/richbl/go-raspi-temp-monitor"></a>
 <a href="https://app.codacy.com/gh/richbl/go-raspi-temp-monitor/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade"><img alt="Link to Codacy Report" src="https://app.codacy.com/project/badge/Grade/9578d68b618d4b2a8e1dd928b8ebb9d6"></a>
 <a href="https://sonarcloud.io/summary/new_code?id=richbl_go-raspi-temp-monitor"><img alt="Link to SonarCloud Report" src="https://sonarcloud.io/api/project_badges/measure?project=richbl_go-raspi-temp-monitor&metric=alert_status"></a>
 <!-- markdownlint-enable MD033 -->
